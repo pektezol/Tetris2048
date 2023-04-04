@@ -27,7 +27,7 @@ public class Tetromino {
       this.type = type;
       // determine the occupied (non-empty) tiles in the tile matrix
       Point[] occupiedTiles = new Point[4]; // tetromino -> 4 occupied tiles
-      int n;
+      int n = 0;
       if (type == 'I') {
          n = 4; // n = number of rows = number of columns in the tile matrix
          // shape of the tetromino I in its initial orientation
@@ -35,14 +35,14 @@ public class Tetromino {
          occupiedTiles[1] = new Point(1, 1);
          occupiedTiles[2] = new Point(1, 2);
          occupiedTiles[3] = new Point(1, 3);
-      } else (type == 'O') {
+      } else if (type == 'O') {
          n = 2; // n = number of rows = number of columns in the tile matrix
          // shape of the tetromino O in its initial orientation
          occupiedTiles[0] = new Point(0, 0); // (column_index, row_index)
          occupiedTiles[1] = new Point(1, 0);
          occupiedTiles[2] = new Point(0, 1);
          occupiedTiles[3] = new Point(1, 1);
-      } else { type == 'Z') {
+      } else if (type == 'Z') {
          n = 3; // n = number of rows = number of columns in the tile matrix
          // shape of the tetromino Z in its initial orientation
          occupiedTiles[0] = new Point(0, 1); // (column_index, row_index)
@@ -50,21 +50,21 @@ public class Tetromino {
          occupiedTiles[2] = new Point(1, 2);
          occupiedTiles[3] = new Point(2, 2);
          
-      } else { type == 'S') {
+      } else if (type == 'S') {
          n = 3;
          // shape of the tetromino S in its initial orientation
          occupiedTiles[0] = new Point(1, 0);
          occupiedTiles[1] = new Point(2, 0);
          occupiedTiles[2] = new Point(0, 1);
          occupiedTiles[3] = new Point(1, 1);
-      } else { type == 'J') {
+      } else if (type == 'J') {
          n = 3;
          // shape of the tetromino J in its initial orientation
          occupiedTiles[0] = new Point(0, 0);
          occupiedTiles[1] = new Point(0, 1);
          occupiedTiles[2] = new Point(1, 2);
          occupiedTiles[3] = new Point(0, 2);
-      } else { type == 'L') {
+      } else if (type == 'L') {
          n = 3;
          // shape of the tetromino L in its initial orientation
          occupiedTiles[0] = new Point(1, 0);
@@ -72,19 +72,20 @@ public class Tetromino {
          occupiedTiles[2] = new Point(0, 2);
          occupiedTiles[3] = new Point(1, 2);
          
-      } else { type == 'T') {
+      } else if (type == 'T') {
+         n = 3;
          // shape of the tetromino T in its initial orientation
          occupiedTiles[0] = new Point(1, 0);
          occupiedTiles[1] = new Point(0, 1);
          occupiedTiles[2] = new Point(1, 1);
          occupiedTiles[3] = new Point(2, 1);
       }
-      // create the tile matrix as a 2D array of booleans
-      tiles = new boolean[n][n];
-      // set the occupied tiles as non-empty in the tile matrix
-      for (Point tile : occupiedTiles) {
-         tiles[tile.y][tile.x] = true;
-      }        
+//      // create the tile matrix as a 2D array of booleans
+//      tiles = new boolean[n][n];
+//      // set the occupied tiles as non-empty in the tile matrix
+//      for (Point tile : occupiedTiles) {
+//         tiles[tile.y][tile.x] = true;
+//      }
   
          
       // create a matrix of numbered tiles based on the shape of the tetromino
