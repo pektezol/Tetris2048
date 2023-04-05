@@ -57,16 +57,16 @@ public class Tetromino {
          occupiedTiles[1] = new Point(2, 0);
          occupiedTiles[2] = new Point(0, 1);
          occupiedTiles[3] = new Point(1, 1);
-      } else if (type == 'J') {
+      } else if (type == 'L') {
          n = 3;
-         // shape of the tetromino J in its initial orientation
+         // shape of the tetromino L in its initial orientation
          occupiedTiles[0] = new Point(0, 0);
          occupiedTiles[1] = new Point(0, 1);
          occupiedTiles[2] = new Point(1, 2);
          occupiedTiles[3] = new Point(0, 2);
-      } else if (type == 'L') {
+      } else if (type == 'J') {
          n = 3;
-         // shape of the tetromino L in its initial orientation
+         // shape of the tetromino J in its initial orientation
          occupiedTiles[0] = new Point(1, 0);
          occupiedTiles[1] = new Point(1, 1);
          occupiedTiles[2] = new Point(0, 2);
@@ -259,5 +259,9 @@ public class Tetromino {
          }
       }
       return true; // the tetromino can be moved in the given direction
+   }
+
+   public char getType() {
+      return type;
    }
 }

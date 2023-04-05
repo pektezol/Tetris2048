@@ -1,4 +1,4 @@
-import java.awt.Color; // the color type used in StdDraw
+import java.awt.*;
 
 // A class used for modelling the game grid
 public class GameGrid {
@@ -7,6 +7,8 @@ public class GameGrid {
    private Tile[][] tileMatrix; // to store the tiles locked on the game grid
    // the tetromino that is currently being moved on the game grid
    private Tetromino currentTetromino = null;
+   // the tetromino that will be used next
+   private Tetromino nextTetromino = null;
    // the gameOver flag shows whether the game is over or not
    private boolean gameOver = false;
    private Color emptyCellColor; // the color used for the empty grid cells
@@ -14,6 +16,8 @@ public class GameGrid {
    private Color boundaryColor; // the color used for the grid boundaries
    private double lineThickness; // the thickness used for the grid lines
    private double boxThickness; // the thickness used for the grid boundaries
+   private int score; // the score of the game
+   private int iterationCount; // the iteration count used for counting total time
 
    // A constructor for creating the game grid based on the given parameters
    public GameGrid(int gridH, int gridW) {
@@ -30,11 +34,18 @@ public class GameGrid {
       // set the thickness values used for the grid lines and the grid boundaries
       lineThickness = 0.002;
       boxThickness = 10 * lineThickness;
+      score = 0;
+      iterationCount = 0;
    }
 
    // A setter method for the currentTetromino data field
    public void setCurrentTetromino(Tetromino currentTetromino) {
       this.currentTetromino = currentTetromino;
+   }
+
+   // A setter method for the nextTetromino data field
+   public void setNextTetromino(Tetromino nextTetromino) {
+      this.nextTetromino = nextTetromino;
    }
 
    // A method used for displaying the game grid
@@ -43,6 +54,7 @@ public class GameGrid {
       StdDraw.clear(emptyCellColor);
       // draw the game grid
       drawGrid();
+      drawSidebar();
       // draw the current/active tetromino if it is not null (the case when the
       // game grid is updated)
       if (currentTetromino != null)
@@ -54,8 +66,41 @@ public class GameGrid {
       StdDraw.pause(50);
    }
 
+   // A method for displaying sidebar stats showing score and next piece during the game
+   public void drawSidebar() {
+      // colors used for the menu
+      Color backgroundColor = new Color(42, 69, 99);
+      Color buttonColor = new Color(25, 255, 228);
+      Color textColor = new Color(31, 160, 239);
+      double totalGridWidth = gridWidth + gridWidth / 3.0;
+      double sidebarCenterX = totalGridWidth - (totalGridWidth / 3.0) / 2.0;
+      double sidebarCenterY = gridHeight - (gridHeight / 3.0) / 2.0;
+      StdDraw.setPenColor(buttonColor);
+      // display the score text on top right
+      Font font = new Font("Arial", Font.PLAIN, 25);
+      StdDraw.setFont(font);
+      StdDraw.setPenColor(buttonColor);
+      String textToDisplay = "Score:";
+      StdDraw.text(sidebarCenterX, sidebarCenterY, textToDisplay);
+      textToDisplay = String.valueOf(score);
+      StdDraw.text(sidebarCenterX, sidebarCenterY - 1, textToDisplay);
+      textToDisplay = "Iteration";
+      StdDraw.text(sidebarCenterX, sidebarCenterY - 3, textToDisplay);
+      textToDisplay = "Count:";
+      StdDraw.text(sidebarCenterX, sidebarCenterY - 4, textToDisplay);
+      textToDisplay = String.valueOf(iterationCount);
+      StdDraw.text(sidebarCenterX, sidebarCenterY - 5, textToDisplay);
+      textToDisplay = "Next";
+      StdDraw.text(sidebarCenterX, sidebarCenterY - 10, textToDisplay);
+      textToDisplay = "Tetromino:";
+      StdDraw.text(sidebarCenterX, sidebarCenterY - 11, textToDisplay);
+      textToDisplay = String.valueOf(nextTetromino.getType());
+      StdDraw.text(sidebarCenterX, sidebarCenterY - 12, textToDisplay);
+   }
+
    // A method for drawing the cells and the lines of the game grid
    public void drawGrid() {
+      iterationCount += 1;
       // for each cell of the game grid
       for (int row = 0; row < gridHeight; row++)
          for (int col = 0; col < gridWidth; col++)

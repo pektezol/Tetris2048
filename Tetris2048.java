@@ -9,11 +9,10 @@ public class Tetris2048 {
       // set the size of the game grid
       int gridH = 18, gridW = 12;
       // set the size of the drawing canvas
-      int canvasH = 40 * gridH, canvasW = 40 * gridW;
+      int canvasH = 40 * gridH, canvasW = 40 * gridW + gridW/3 * 40;
       StdDraw.setCanvasSize(canvasW, canvasH);
-      // dsadasjkm
       // set the scale of the coordinate system
-      StdDraw.setXscale(-0.5, gridW - 0.5);
+      StdDraw.setXscale(-0.5, gridW + ((double) gridW / 3) - 0.5);
       StdDraw.setYscale(-0.5, gridH - 0.5);
       // double buffering enables computer animations, creating an illusion of
       // motion by repeating four steps: clear, draw, show and pause
@@ -30,10 +29,11 @@ public class Tetris2048 {
       Tetromino currentTetromino = createTetromino();
       grid.setCurrentTetromino(currentTetromino);
 
+      Tetromino nextTetromino = createTetromino();
+      grid.setNextTetromino(nextTetromino);
       // display a simple menu before opening the game
       // by using the displayGameMenu method defined below
       displayGameMenu(gridH, gridW);
-
       // the main game loop (using some keyboard keys for moving the tetromino)
       // -----------------------------------------------------------------------
       int iterationCount = 0; // used for the speed of the game
@@ -72,8 +72,11 @@ public class Tetris2048 {
                break;
             // create the next tetromino to enter the game grid
             // by using the createTetromino function defined below
-            currentTetromino = createTetromino();
-            grid.setCurrentTetromino(currentTetromino);
+            currentTetromino = nextTetromino;
+            grid.setCurrentTetromino(nextTetromino);
+            nextTetromino = createTetromino();
+            grid.setNextTetromino(nextTetromino);
+
          }
 
          // display the game grid and the current tetromino
@@ -93,8 +96,7 @@ public class Tetris2048 {
       int randomIndex = random.nextInt(tetrominoTypes.length);
       char randomType = tetrominoTypes[randomIndex];
       // create and return the tetromino
-      Tetromino tetromino = new Tetromino(randomType);
-      return tetromino;
+      return new Tetromino(randomType);
    }
 
    // A method for displaying a simple menu before starting the game
@@ -108,6 +110,7 @@ public class Tetris2048 {
       // the relative path of the image file
       String imgFile = "images/menu_image.png";
       // center coordinates to display the image
+      gridWidth = gridWidth + gridWidth / 4;
       double imgCenterX = (gridWidth - 1) / 2.0, imgCenterY = gridHeight - 7;
       // display the image
       StdDraw.picture(imgCenterX, imgCenterY, imgFile);
