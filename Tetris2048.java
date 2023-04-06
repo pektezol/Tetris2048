@@ -50,9 +50,9 @@ public class Tetris2048 {
             currentTetromino.move("right", grid);
          // if the down arrow key is being pressed
          else if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN))
-            // move the active tetromino down by one
-            currentTetromino.move("down", grid);
-
+             // move the active tetromino down by one
+             currentTetromino.move("alldown", grid );
+       
          // move the active tetromino down by 1 once in 10 iterations (auto fall)
          boolean success = true;
          if (iterationCount % 10 == 0)

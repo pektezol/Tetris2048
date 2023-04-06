@@ -189,6 +189,11 @@ public class Tetromino {
          bottomLeftCell.setX(bottomLeftCell.getX() - 1);
       else if (direction == "right")
          bottomLeftCell.setX(bottomLeftCell.getX() + 1);
+      else if (direction == "alldown") {
+    	  while (canBeMoved( "down" , gameGrid)) {
+    	     	 bottomLeftCell.setY(bottomLeftCell.getY() - 1 );
+    	  }
+      }
       else // direction == "down"
          bottomLeftCell.setY(bottomLeftCell.getY() - 1);
       return true; // a successful move in the given direction
