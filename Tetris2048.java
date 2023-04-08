@@ -44,15 +44,22 @@ public class Tetris2048 {
          if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT))
             // move the active tetromino left by one
             currentTetromino.move("left", grid);
-         // if the right arrow key is being pressed
+            // if the right arrow key is being pressed
          else if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT))
             // move the active tetromino right by one
             currentTetromino.move("right", grid);
-         // if the down arrow key is being pressed
+            // if the down arrow key is being pressed
          else if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN))
-             // move the active tetromino down by one
-             currentTetromino.move("alldown", grid );
-       
+            // move the active tetromino down by one
+            currentTetromino.move("alldown", grid);
+
+         else if (StdDraw.isKeyPressed(KeyEvent.VK_D))
+            currentTetromino.rotateTetromino("d", grid);
+         else if (StdDraw.isKeyPressed(KeyEvent.VK_A))
+            currentTetromino.rotateTetromino("a", grid);
+
+
+
          // move the active tetromino down by 1 once in 10 iterations (auto fall)
          boolean success = true;
          if (iterationCount % 10 == 0)
