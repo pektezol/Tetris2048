@@ -1,5 +1,6 @@
 import java.awt.Color; // the color type used in StdDraw
 import java.awt.Font; // the font type used in StdDraw
+import java.util.Random;
 
 // A class used for modeling numbered tiles as in 2048
 public class Tile {
@@ -22,8 +23,8 @@ public class Tile {
    // the default constructor that creates a tile with 2 as the number on it
    public Tile() {
       // set the number on the tile
-      number = 2;
-      // set the colors of the tile
+      int[] random_numbers = {2, 4}; //Tile now assigns 2 or 4 numbers randomly
+      this.number = random_numbers[new Random().nextInt(random_numbers.length)];  // set the colors of the tile
       backgroundColor = new Color(151, 178, 199);
       foregroundColor = new Color(0, 100, 200);
       boxColor = new Color(0, 100, 200);
