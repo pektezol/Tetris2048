@@ -185,7 +185,6 @@ public class GameGrid {
    }
 
    public void mergeTiles() {
-      System.out.println(Arrays.deepToString(tileMatrix));
       boolean merged = true;
       while (merged) {
          merged = false;
