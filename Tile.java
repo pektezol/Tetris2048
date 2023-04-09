@@ -51,4 +51,13 @@ public class Tile {
       StdDraw.setFont(font);
       StdDraw.text(position.getX(), position.getY(), "" + number);
    }
+
+   public void setNumber(int number) {
+      this.number = number;
+   }
+
+   public int getNumber() {
+      return number;
+   }
+
 }

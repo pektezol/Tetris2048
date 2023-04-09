@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Arrays;
 
 // A class used for modelling the game grid
 public class GameGrid {
@@ -178,7 +179,61 @@ public class GameGrid {
             }
          }
       }
+      mergeTiles();
       // return the value of the gameOver flag
       return gameOver;
    }
+
+   public void mergeTiles() {
+      System.out.println(Arrays.deepToString(tileMatrix));
+      boolean merged = true;
+      while (merged) {
+         merged = false;
+         for (int w = 0; w < tileMatrix[0].length; w++) {
+            for (int h = 0; h < tileMatrix.length; h++) {
+               if (tileMatrix[h][w] == null || tileMatrix[h+1][w] == null) {
+                  continue;
+               }
+               if (tileMatrix[h][w].getNumber() == tileMatrix[h+1][w].getNumber()) {
+                  score += tileMatrix[h][w].getNumber() * 2;
+                  tileMatrix[h][w].setNumber(tileMatrix[h][w].getNumber() * 2);
+                  tileMatrix[h+1][w] = null;
+                  int above = 2;
+                  while (tileMatrix[h+above][w] != null) {
+                     tileMatrix[h+above-1][w] = tileMatrix[h+above][w];
+                     tileMatrix[h+above][w] = null;
+                     above++;
+                  }
+                  merged = true;
+                  break;
+               }
+            }
+            if (merged) {
+               break;
+            }
+         }
+         display();
+
+      }
+      boolean destroy = true;
+      while (destroy) {
+         destroy = false;
+         for (int w = 0; w < tileMatrix[0].length; w++) {
+            for (int h = 0; h < tileMatrix.length; h++) {
+               if (tileMatrix[h][w] != null && h != 0 && h != 1 && h != tileMatrix.length - 1 && w != 0 && w != 1 && w != tileMatrix[0].length - 1
+                       && tileMatrix[h][w-1] == null && tileMatrix[h][w+1] == null && tileMatrix[h-1][w] == null){
+                  score += tileMatrix[h][w].getNumber();
+                  tileMatrix[h][w] = null;
+                  destroy = true;
+                  break;
+               }
+            }
+            if (destroy) {
+               break;
+            }
+         }
+      }
+
+   }
+
 }
