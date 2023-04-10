@@ -5,7 +5,7 @@ import java.util.Random;
 
 // The main class to run the Tetris 2048 game
 public class Tetris2048 {
-   public static void main(String[] args) {
+   public static void main(String[] args) throws InterruptedException {
       // set the size of the game grid
       int gridH = 18, gridW = 12;
       // set the size of the drawing canvas
@@ -41,22 +41,32 @@ public class Tetris2048 {
          // check user interactions via the keyboard
          // --------------------------------------------------------------------
          // if the left arrow key is being pressed
-         if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT))
+         if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) {
             // move the active tetromino left by one
             currentTetromino.move("left", grid);
-            // if the right arrow key is being pressed
-         else if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT))
+            Thread.sleep(20);
+         }
+         // if the right arrow key is being pressed
+         else if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) {
             // move the active tetromino right by one
             currentTetromino.move("right", grid);
-            // if the down arrow key is being pressed
-         else if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN))
+            Thread.sleep(20);
+         }
+         // if the down arrow key is being pressed
+         else if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {
             // move the active tetromino down by one
             currentTetromino.move("alldown", grid);
+            Thread.sleep(20);
+         }
 
-         else if (StdDraw.isKeyPressed(KeyEvent.VK_D))
-            currentTetromino.rotateTetromino("d", grid);
-         else if (StdDraw.isKeyPressed(KeyEvent.VK_A))
-            currentTetromino.rotateTetromino("a", grid);
+         else if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
+            currentTetromino.rotateClockwise();
+            Thread.sleep(20);
+         }
+         else if (StdDraw.isKeyPressed(KeyEvent.VK_A)) {
+            currentTetromino.rotateCounterclockwise();
+            Thread.sleep(20);
+         }
 
 
 

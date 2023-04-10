@@ -200,70 +200,32 @@ public class Tetromino {
       return true; // a successful move in the given direction
    }
 
-   public boolean rotateTetromino(String direction, GameGrid gameGrid) {
-      // check if the tetromino can be rotated in the given direction by using the
-      // can_be_rotated method defined below
-      if (!this.canBeRotated(direction, gameGrid)) {
-         return false;
-      }
-
-      // Rotate tetromino 90 degree # up = clockwise
-      if (direction.equals("d")) {
-         // get the copy of the tile matrix and the position of the bottom left
-         // cell in the copy
-         this.tileMatrix = rotateMatrix90DegreesClockwise(this.tileMatrix);
-      } else if (direction.equals("a")) {
-         // get the copy of the tile matrix and the position of the bottom left
-         // cell in the copy
-         this.tileMatrix = rotateMatrix90DegreesCounterClockwise();
-      }
-
-      return true;
-   }
-
-   private Tile[][] rotateMatrix90DegreesCounterClockwise() {
-      return rotateMatrix90DegreesCounterClockwise();
-   }
-
-   private Tile[][] rotateMatrix90DegreesClockwise(Tile[][] tileMatrix) {
-      return rotateMatrix90DegreesClockwise();
-   }
-
-   private Tile[][] rotateMatrix90DegreesClockwise() {
-      return rotateMatrix90DegreesClockwise();
-   }
-
-   private boolean canBeRotated(String direction, GameGrid gameGrid) {
-      return canBeRotated ;
-   }
-
-   private int[][] rotateMatrix90DegreesClockwise(int[][] matrix) {
-      int rows = matrix.length;
-      int cols = matrix[0].length;
-      int[][] rotatedMatrix = new int[cols][rows];
-
-      for (int i = 0; i < rows; i++) {
-         for (int j = 0; j < cols; j++) {
-            rotatedMatrix[j][rows - 1 - i] = matrix[i][j];
+   // A method for rotating the tetromino clockwise
+   public void rotateClockwise() {
+      int n = tileMatrix.length; // n = number of rows = number of columns
+      Tile[][] newTileMatrix = new Tile[n][n];
+      // rotate the tiles inside the tile matrix
+      for (int row = 0; row < n; row++) {
+         for (int col = 0; col < n; col++) {
+            newTileMatrix[row][col] = tileMatrix[n - 1 - col][row];
          }
       }
-
-      return rotatedMatrix;
+      tileMatrix = newTileMatrix;
    }
 
-   private int[][] rotateMatrix90DegreesCounterClockwise(int[][] matrix) {
-      int rows = matrix.length;
-      int cols = matrix[0].length;
-      int[][] rotatedMatrix = new int[cols][rows];
-
-      for (int i = 0; i < rows; i++) {
-         for (int j = 0; j < cols; j++) {
-            rotatedMatrix[cols - 1 - j][i] = matrix[i][j];
+   // A method for rotating the tetromino counterclockwise
+   public void rotateCounterclockwise() {
+      int n = tileMatrix.length; // n = number of rows = number of columns
+      Tile[][] newTileMatrix = new Tile[n][n];
+      // rotate the tiles inside the tile matrix
+      for (int row = 0; row < n; row++) {
+         for (int col = 0; col < n; col++) {
+            newTileMatrix[row][col] = tileMatrix[col][n - 1 - row];
          }
       }
-
-      return rotatedMatrix;
+      tileMatrix = newTileMatrix;
    }
+
 
 
    // A method to check if the tetromino can be moved in the given direction or not
