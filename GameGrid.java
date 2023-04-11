@@ -235,4 +235,48 @@ public class GameGrid {
 
    }
 
+   // A method to check if a line is filled with tiles and clear the tile.
+   public void clearLines(){
+
+      boolean isFilled;
+
+      for(int r = gridHeight - 1; r >= 0; r--){
+
+         isFilled = true;
+
+         for(int c = 0; c < gridWidth; c++){
+            if(tileMatrix[r][c] == null){
+               isFilled = false;
+               break;
+            }
+         }
+
+         if(isFilled){
+            clearLine(r);
+            shiftDown(r);
+         }
+      }
+   }
+
+   // This method clears the filled tile and adds the numbers of the tiles cleared to the score.
+   public void clearLine(int r){
+      int scoreToBeAdded = 0;
+      for(int i = 0; i < gridWidth; i++){
+         scoreToBeAdded += tileMatrix[r][i].getNumber();
+         tileMatrix[r][i] = null;
+      }
+
+      score += scoreToBeAdded;
+   }
+
+   // This method shifts every tile down by one after a line is cleared.
+   // the parameter "r" is the cleared line.
+   public void shiftDown(int r){
+      for(int row = r; row < gridHeight - 1; row++){
+         for(int col = 0; col < gridWidth; col++){
+            tileMatrix[row][col] = tileMatrix[row + 1][col];
+         }
+      }
+   }
+
 }

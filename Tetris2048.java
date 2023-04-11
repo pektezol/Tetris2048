@@ -93,7 +93,7 @@ public class Tetris2048 {
             grid.setCurrentTetromino(nextTetromino);
             nextTetromino = createTetromino();
             grid.setNextTetromino(nextTetromino);
-
+            grid.clearLines();
          }
 
          // display the game grid and the current tetromino
