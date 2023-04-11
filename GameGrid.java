@@ -19,7 +19,7 @@ public class GameGrid {
    private Color boundaryColor; // the color used for the grid boundaries
    private double lineThickness; // the thickness used for the grid lines
    private double boxThickness; // the thickness used for the grid boundaries
-   public static int score; // the score of the game
+   private int score; // the score of the game
    private int iterationCount; // the iteration count used for counting total time
 
    // A constructor for creating the game grid based on the given parameters
