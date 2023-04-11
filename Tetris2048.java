@@ -48,31 +48,31 @@ public class Tetris2048 {
          if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) {
             // move the active tetromino left by one
             currentTetromino.move("left", grid);
-            Thread.sleep(20);
+            StdDraw.pause(20);
          }
          // if the right arrow key is being pressed
          else if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) {
             // move the active tetromino right by one
             currentTetromino.move("right", grid);
-            Thread.sleep(20);
+            StdDraw.pause(20);
          }
          // if the down arrow key is being pressed
          else if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {
             // move the active tetromino down by one
             currentTetromino.move("alldown", grid);
-            Thread.sleep(20);
+            StdDraw.pause(20);
          }
 
          else if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
             currentTetromino.rotateClockwise();
-            Thread.sleep(20);
+            StdDraw.pause(50);
          }
          else if (StdDraw.isKeyPressed(KeyEvent.VK_A)) {
             currentTetromino.rotateCounterclockwise();
-            Thread.sleep(20);
+            StdDraw.pause(50);
          }
          else if (StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE)){
-            StdDraw.pause(5);
+            StdDraw.pause(50);
             displayPauseMenu(gridH, gridW);
          }
 
