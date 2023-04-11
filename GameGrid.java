@@ -1,5 +1,7 @@
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 // A class used for modelling the game grid
 public class GameGrid {
@@ -186,53 +188,77 @@ public class GameGrid {
 
    public void mergeTiles() {
       boolean merged = true;
-      while (merged) {
-         merged = false;
-         for (int w = 0; w < tileMatrix[0].length; w++) {
-            for (int h = 0; h < tileMatrix.length; h++) {
-               if (tileMatrix[h][w] == null || tileMatrix[h+1][w] == null) {
-                  continue;
-               }
-               if (tileMatrix[h][w].getNumber() == tileMatrix[h+1][w].getNumber()) {
-                  score += tileMatrix[h][w].getNumber() * 2;
-                  tileMatrix[h][w].setNumber(tileMatrix[h][w].getNumber() * 2);
-                  tileMatrix[h+1][w] = null;
-                  int above = 2;
-                  while (tileMatrix[h+above][w] != null) {
-                     tileMatrix[h+above-1][w] = tileMatrix[h+above][w];
-                     tileMatrix[h+above][w] = null;
-                     above++;
+      try {
+         while (merged) {
+            merged = false;
+            for (int w = 0; w < tileMatrix[0].length; w++) {
+               for (int h = 0; h < tileMatrix.length; h++) {
+                  if (tileMatrix[h][w] == null || tileMatrix[h+1][w] == null) {
+                     continue;
                   }
-                  merged = true;
+                  if (tileMatrix[h][w].getNumber() == tileMatrix[h+1][w].getNumber()) {
+                     score += tileMatrix[h][w].getNumber() * 2;
+                     tileMatrix[h][w].setNumber(tileMatrix[h][w].getNumber() * 2);
+                     tileMatrix[h+1][w] = null;
+                     int above = 2;
+                     while (tileMatrix[h+above][w] != null) {
+                        tileMatrix[h+above-1][w] = tileMatrix[h+above][w];
+                        tileMatrix[h+above][w] = null;
+                        above++;
+                     }
+                     merged = true;
+                     break;
+                  }
+               }
+               if (merged) {
                   break;
                }
             }
-            if (merged) {
-               break;
-            }
+            display();
          }
-         display();
-
+      } catch (Exception e) {
+         System.out.println("Couldn't merge outside tiles!");
       }
-      boolean destroy = true;
-      while (destroy) {
-         destroy = false;
-         for (int w = 0; w < tileMatrix[0].length; w++) {
-            for (int h = 0; h < tileMatrix.length; h++) {
-               if (tileMatrix[h][w] != null && h != 0 && h != 1 && h != tileMatrix.length - 1 && w != 0 && w != 1 && w != tileMatrix[0].length - 1
-                       && tileMatrix[h][w-1] == null && tileMatrix[h][w+1] == null && tileMatrix[h-1][w] == null){
-                  score += tileMatrix[h][w].getNumber();
-                  tileMatrix[h][w] = null;
-                  destroy = true;
-                  break;
-               }
-            }
-            if (destroy) {
-               break;
-            }
+      destroyFloatingTiles();
+   }
+
+   public void destroyFloatingTiles() {
+      boolean[][] visited = new boolean[gridHeight][gridWidth];
+
+      // Get tile groups with depth-first search
+      for (int col = 0; col < gridWidth; col++) {
+         if (tileMatrix[0][col] != null && !visited[0][col]) {
+            dfs(0, col, visited);
          }
       }
 
+      // Remove floating tiles
+      for (int row = 1; row < gridHeight; row++) {
+         for (int col = 0; col < gridWidth; col++) {
+            if (tileMatrix[row][col] != null && !visited[row][col]) {
+               score += tileMatrix[row][col].getNumber();
+               tileMatrix[row][col] = null;
+            }
+         }
+      }
+   }
+
+   // Depth-first search implementation for the grid
+   private void dfs(int row, int col, boolean[][] visited) {
+      if (row < 0 || row >= gridHeight || col < 0 || col >= gridWidth) {
+         return;
+      }
+
+      if (visited[row][col] || tileMatrix[row][col] == null) {
+         return;
+      }
+
+      visited[row][col] = true;
+
+      dfs(row - 1, col, visited); // Up
+      dfs(row + 1, col, visited); // Down
+      dfs(row, col - 1, visited); // Left
+      dfs(row, col + 1, visited); // Right
    }
 
 }
