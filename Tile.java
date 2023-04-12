@@ -56,10 +56,27 @@ public class Tile {
 			foregroundColor = new Color(0, 100, 200);
 			boxColor = new Color(0, 100, 200);
 		} else if (number == 128) {
-			backgroundColor = new Color(28, 111, 137);
+			backgroundColor = new Color(149, 168, 255);
+			foregroundColor = new Color(0, 100, 200);
+			boxColor = new Color(0, 100, 200);
+		}else if (number == 256) {
+			backgroundColor = new Color(135, 143, 255);
+			foregroundColor = new Color(0, 100, 200);
+			boxColor = new Color(0, 100, 200);
+		}else if (number == 512) {
+			backgroundColor = new Color(120, 130, 255);
+			foregroundColor = new Color(0, 100, 200);
+			boxColor = new Color(0, 100, 200);
+		}else if (number == 1024) {
+			backgroundColor = new Color(103, 116, 255);
+			foregroundColor = new Color(0, 100, 200);
+			boxColor = new Color(0, 100, 200);
+		}else if (number == 2048) {
+			backgroundColor = new Color(84, 100, 255);
 			foregroundColor = new Color(0, 100, 200);
 			boxColor = new Color(0, 100, 200);
 		}
+
 
 	}
 
