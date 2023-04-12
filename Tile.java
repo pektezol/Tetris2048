@@ -40,7 +40,7 @@ public class Tile {
 			boxColor = new Color(0, 100, 200);
 		}
 		else if (number == 8) {
-			backgroundColor = new Color(166, 220, 237);
+			backgroundColor = new Color(118, 210, 255);
 			foregroundColor = new Color(0, 100, 200);
 			boxColor = new Color(0, 100, 200);
 		} else if (number == 16) {
