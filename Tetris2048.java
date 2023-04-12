@@ -59,6 +59,13 @@ public class Tetris2048 {
          // if the down arrow key is being pressed
          else if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {
             // move the active tetromino down by one
+            currentTetromino.move("down", grid);
+            StdDraw.pause(20);
+         }
+         
+         // if the s key is being pressed
+         else if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
+            // move the active tetromino to the very bottom
             currentTetromino.move("alldown", grid);
             StdDraw.pause(20);
          }
