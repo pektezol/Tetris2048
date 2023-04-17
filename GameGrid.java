@@ -305,4 +305,16 @@ public class GameGrid {
       }
    }
 
+   public int getLargestTileNumber() {
+      int maxNum = 0;
+      for (int i = 0; i < gridHeight; i++) {
+         for (int j = 0; j < gridWidth; j++) {
+            if (tileMatrix[i][j] != null && tileMatrix[i][j].getNumber() > maxNum) {
+               maxNum = tileMatrix[i][j].getNumber();
+            }
+         }
+      }
+      return maxNum;
+   }
+
 }
