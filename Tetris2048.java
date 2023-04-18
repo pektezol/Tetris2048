@@ -102,7 +102,7 @@ public class Tetris2048 {
                displayGameOverMenu(gridH, gridW, false);
                break;
             }
-            if (grid.getLargestTileNumber() >= 16) {
+            if (grid.getLargestTileNumber() >= 2048) {
                displayGameOverMenu(gridH, gridW, true);
             }
             // create the next tetromino to enter the game grid
