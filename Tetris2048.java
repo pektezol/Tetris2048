@@ -98,8 +98,13 @@ public class Tetris2048 {
             // update the game grid by locking the tiles of the landed tetromino
             boolean gameOver = grid.updateGrid(tiles, pos);
             // end the main game loop if the game is over
-            if (gameOver)
+            if (gameOver){
+               displayGameOverMenu(gridH, gridW, false);
                break;
+            }
+            if (grid.getLargestTileNumber() >= 2048) {
+               displayGameOverMenu(gridH, gridW, true);
+            }
             // create the next tetromino to enter the game grid
             // by using the createTetromino function defined below
             currentTetromino = nextTetromino;
@@ -243,7 +248,61 @@ public class Tetris2048 {
          }
       }
    }
+   public static void displayGameOverMenu(int gridHeight, int gridWidth, boolean win) throws InterruptedException {
+      // colors used for the pause menu
+      Color buttonColor = new Color(25, 255, 228);
+      Color textColor = new Color(31, 160, 239);
+      // clear the background canvas to background_color
+      // the relative path of the image file
+      String imgFile = "images/loseMenu_image.png";
+      if (win) {
+         imgFile = "images/winMenu_image.png";
+      }
+      gridWidth = gridWidth + gridWidth / 4;
+      double imgCenterX = (gridWidth - 1) / 2.0, imgCenterY = gridHeight - 7;
+      StdDraw.picture(imgCenterX, imgCenterY + 2, imgFile);
+      double buttonW = gridWidth - 1.5, buttonH = 2;
+      double buttonX = imgCenterX, buttonY = 5;
+      StdDraw.setPenColor(buttonColor);
 
+      // creating the new game button in the center.
+      StdDraw.filledRectangle(buttonX, buttonY, buttonW / 2, buttonH / 2);
+      // creating the exit game button with -2.5 Y difference.
+      StdDraw.filledRectangle(buttonX, buttonY - 2.5, buttonW / 2, buttonH / 2);
+
+      Font font = new Font("Arial", Font.PLAIN, 25);
+      StdDraw.setFont(font);
+      StdDraw.setPenColor(textColor);
+
+      String textToDisplay = "New Game";
+      StdDraw.text(buttonX, buttonY, textToDisplay);
+
+      textToDisplay = "Exit Game";
+      StdDraw.text(buttonX, buttonY - 2.5, textToDisplay);
+
+      // menu interaction loop
+      while(true){
+         StdDraw.show();
+         StdDraw.pause(50);
+
+         // check if the mouse is clicked
+         if (StdDraw.isMousePressed()) {
+            // get the x and y coordinates of the position of the mouse
+            double mouseX = StdDraw.mouseX(), mouseY = StdDraw.mouseY();
+            // check if these coordinates are inside the button
+            if (mouseX > buttonX - buttonW / 2 && mouseX < buttonX + buttonW / 2)
+               // this if checks the coordinates for restart button.
+               if (mouseY > (buttonY) - buttonH / 2 && mouseY < (buttonY) + buttonH / 2){
+                  restartGame();
+               }
+
+               // this if checks the coordinates for exit button.
+               else if(mouseY > (buttonY - 2.5) - buttonH / 2 && mouseY < (buttonY - 2.5) + buttonH / 2){
+                  System.exit(0); // exit the application.
+               }
+         }
+      }
+   }
    // restartGame method recalls the main method without loading the intro menu.
    public static void restartGame() throws InterruptedException {
       isRestarted = true;
