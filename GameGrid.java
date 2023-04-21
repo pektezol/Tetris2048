@@ -97,8 +97,51 @@ public class GameGrid {
       StdDraw.text(sidebarCenterX, sidebarCenterY - 10, textToDisplay);
       textToDisplay = "Tetromino:";
       StdDraw.text(sidebarCenterX, sidebarCenterY - 11, textToDisplay);
-      textToDisplay = String.valueOf(nextTetromino.getType());
-      StdDraw.text(sidebarCenterX, sidebarCenterY - 12, textToDisplay);
+      StdDraw.setPenColor(255, 255, 255);
+      switch (nextTetromino.getType()) {
+         case 'I':
+            StdDraw.filledRectangle(sidebarCenterX, sidebarCenterY - 12, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX, sidebarCenterY - 12.4, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX, sidebarCenterY - 12.8, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX, sidebarCenterY - 13.2, 0.2, 0.2);
+            break;
+         case 'O':
+            StdDraw.filledRectangle(sidebarCenterX - 0.2, sidebarCenterY - 12, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX - 0.2, sidebarCenterY - 12.4, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX + 0.2, sidebarCenterY - 12, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX + 0.2, sidebarCenterY - 12.4, 0.2, 0.2);
+            break;
+         case 'Z':
+            StdDraw.filledRectangle(sidebarCenterX, sidebarCenterY - 12, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX, sidebarCenterY - 12.4, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX - 0.4, sidebarCenterY - 12, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX + 0.4, sidebarCenterY - 12.4, 0.2, 0.2);
+            break;
+         case 'S':
+            StdDraw.filledRectangle(sidebarCenterX, sidebarCenterY - 12, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX, sidebarCenterY - 12.4, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX + 0.4, sidebarCenterY - 12, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX - 0.4, sidebarCenterY - 12.4, 0.2, 0.2);
+            break;
+         case 'L':
+            StdDraw.filledRectangle(sidebarCenterX - 0.2, sidebarCenterY - 12, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX - 0.2, sidebarCenterY - 12.4, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX - 0.2, sidebarCenterY - 12.8, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX + 0.2, sidebarCenterY - 12.8, 0.2, 0.2);
+            break;
+         case 'J':
+            StdDraw.filledRectangle(sidebarCenterX + 0.2, sidebarCenterY - 12, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX + 0.2, sidebarCenterY - 12.4, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX + 0.2, sidebarCenterY - 12.8, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX - 0.2, sidebarCenterY - 12.8, 0.2, 0.2);
+            break;
+         case 'T':
+            StdDraw.filledRectangle(sidebarCenterX, sidebarCenterY - 12, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX, sidebarCenterY - 12.4, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX + 0.4, sidebarCenterY - 12.4, 0.2, 0.2);
+            StdDraw.filledRectangle(sidebarCenterX - 0.4, sidebarCenterY - 12.4, 0.2, 0.2);
+            break;
+      }
    }
 
    // A method for drawing the cells and the lines of the game grid
